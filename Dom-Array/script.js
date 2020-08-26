@@ -27,6 +27,56 @@ async function getRndomUsers() {
 
 }
 
+/// double money for everyone
+
+function doubleMoney(items) {
+
+    data = data.map((user) => {
+        return { ...user, money: user.money * 2 }
+
+    })
+
+    updateDom()
+
+}
+
+/// filter only milioners
+
+function showMillionars() {
+    data = data.filter((user) => {
+        return user.money > 1000000
+
+    })
+    updateDom()
+
+}
+
+/// calculate Wealth
+
+function calculateWealth() {
+
+    const wealth = data.reduce((acc, user) =>
+        (acc += user.money), 0
+
+    )
+
+    const wealthEl = document.createElement('div')
+    wealthEl.innerHTML = `<h3>Total Wealth : <strong> ${formatMoney(wealth)}  </strong>`
+    main.appendChild(wealthEl)
+
+}
+
+
+
+/// sorted function
+
+
+function sortByRichest(a, b) {
+    data.sort((a, b) => b.money - a.money)
+    updateDom()
+
+}
+
 
 ///add new object  to data arr
 
@@ -67,9 +117,10 @@ function formatMoney(number) {
 ///event listeners 
 
 addUserBtn.addEventListener('click', getRndomUsers)
-
-
-
+doubleBtn.addEventListener('click', doubleMoney)
+sortBtn.addEventListener('click', sortByRichest)
+showMillionairesBtn.addEventListener('click', showMillionars)
+calculateWealthBtn.addEventListener('click', calculateWealth)
 
 
 
